@@ -6,6 +6,6 @@ This is a project of mine that I am using to help keep track of my finances. I w
 <ol>
   <li>Work on income import issue - income import not working correctly. Income being duplicated rather than added to during import.</li>
   <li>Search functionality in the bills and paychecks breakdown tabs not working correctly.</li>
-  <li>Need to setup a place for the export function to place the exported file.</li>
+  <li><strike>Need to setup a place for the export function to place the exported file.</strike></li>
   <li>Need to add different types of exports. (financial reports, bill breakdowns, income vs bills report, ect...)</li>
 </ol>
