@@ -44,13 +44,13 @@ public class IssueTracker {
         
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         
-        if(model.getRowCount() > 0){
-            
-            for(int row = model.getRowCount() - 1; row >= 0; row--){
-                model.removeRow(row);
-            }
-            
-        }
+//        if(model.getRowCount() > 0){
+//            
+//            for(int row = model.getRowCount() - 1; row >= 0; row--){
+//                model.removeRow(row);
+//            }
+//            
+//        }
         
         Object rowData[] = {issue, e.getMessage()};
         

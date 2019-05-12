@@ -59,14 +59,12 @@ public class ReadFromExcel {
                 Cell categoryCell = row.getCell(2);
                 Cell expenseCell = row.getCell(3);
                 Cell descriptionCell = row.getCell(4);
-                Cell userIdCell = row.getCell(5);
                 
                 info.setId(rowIndex);
                 info.setDate(dateCell.getStringCellValue());
                 info.setCategory(categoryCell.getStringCellValue());
                 info.setExpense(expenseCell.getNumericCellValue());
                 info.setDescription(descriptionCell.getStringCellValue());
-                info.setUser_id(1);
                 
                 bills.add(info);
                                 
@@ -89,7 +87,6 @@ public class ReadFromExcel {
                 info.setCategory(categoryCell.getStringCellValue());
                 info.setIncome(incomeCell.getNumericCellValue());
                 info.setDescription(descriptionCell.getStringCellValue());
-                info.setUser_id(1);
                 
                 income.add(info);
                                                 

@@ -86,7 +86,6 @@ public class Import_Export {
                     XSSFCell categoryCell = row.createCell(2);
                     XSSFCell expenseCell = row.createCell(3);
                     XSSFCell descriptionCell = row.createCell(4);
-                    XSSFCell userIdCell = row.createCell(5);
 
                     // Place the data in each cell of each row
                     idCell.setCellValue(bills.get(i).getId());
@@ -96,7 +95,6 @@ public class Import_Export {
                     expenseCell.setCellType(CellType.NUMERIC);
                     expenseCell.setCellValue(bills.get(i).getExpense());
                     descriptionCell.setCellValue(bills.get(i).getDescription());
-                    userIdCell.setCellValue(bills.get(i).getUser_id());
                     
                     current++;
                     progressBar.setValue(current);
@@ -114,7 +112,6 @@ public class Import_Export {
                     XSSFCell categoryCell = row.createCell(2);
                     XSSFCell incomeCell = row.createCell(3);
                     XSSFCell descriptionCell = row.createCell(4);
-                    XSSFCell userIdCell = row.createCell(5);
 
                     // Place the data in each cell of each row
                     idCell.setCellValue(income.get(i).getId());
@@ -125,7 +122,6 @@ public class Import_Export {
                     incomeCell.setCellType(CellType.NUMERIC);
                     incomeCell.setCellValue(income.get(i).getIncome());
                     descriptionCell.setCellValue(income.get(i).getDescription());
-                    userIdCell.setCellValue(income.get(i).getUser_id());
 
                 }
 
@@ -139,14 +135,12 @@ public class Import_Export {
                 XSSFCell billCategoryHeaderCell = billHeaders.createCell(2);
                 XSSFCell billExpenseHeaderCell = billHeaders.createCell(3);
                 XSSFCell billDescriptionHeaderCell = billHeaders.createCell(4);
-                XSSFCell billUserIdHeaderCell = billHeaders.createCell(5);
 
                 XSSFCell incomeIdHeaderCell = incomeHeaders.createCell(0);
                 XSSFCell incomeDateHeaderCell = incomeHeaders.createCell(1);
                 XSSFCell incomeCategoryHeaderCell = incomeHeaders.createCell(2);
                 XSSFCell incomeHeaderCell = incomeHeaders.createCell(3);
                 XSSFCell incomeDescriptionHeaderCell = incomeHeaders.createCell(4);
-                XSSFCell incomeUserIdHeaderCell = incomeHeaders.createCell(5);
 
                 // Populate the cells of the header row
                 billIdHeaderCell.setCellValue("ID");
@@ -155,14 +149,12 @@ public class Import_Export {
                 billExpenseHeaderCell.setCellValue("Expense");
                 billDescriptionHeaderCell.setCellValue("Expense Description");
                 billDateHeaderCell.setCellValue("Date");
-                billUserIdHeaderCell.setCellValue("User ID");
 
                 incomeIdHeaderCell.setCellValue("ID");
                 incomeDateHeaderCell.setCellValue("Date");
                 incomeCategoryHeaderCell.setCellValue("Income Category");
                 incomeHeaderCell.setCellValue("Income");
                 incomeDescriptionHeaderCell.setCellValue("Income Description");
-                incomeUserIdHeaderCell.setCellValue("User ID");
 
                 resultsOutputFile = new FileOutputStream(f);
 
@@ -172,14 +164,12 @@ public class Import_Export {
                 billSheet.autoSizeColumn(2);
                 billSheet.autoSizeColumn(3);
                 billSheet.autoSizeColumn(4);
-                billSheet.autoSizeColumn(5);
 
                 incomeSheet.autoSizeColumn(0);
                 incomeSheet.autoSizeColumn(1);
                 incomeSheet.autoSizeColumn(2);
                 incomeSheet.autoSizeColumn(3);
                 incomeSheet.autoSizeColumn(4);
-                incomeSheet.autoSizeColumn(5);
 
                 wb.write(resultsOutputFile);
                 JOptionPane.showMessageDialog(null, "The information has been exported.");
@@ -189,13 +179,11 @@ public class Import_Export {
             }
             finally{
                 if(resultsOutputFile != null){
-                    System.out.println("flush");
                     try {
                         resultsOutputFile.flush();
                     } catch (IOException ex) {
                         Logger.getLogger(Import_Export.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    System.out.println("close again");
                     try {
                         resultsOutputFile.close();
                     } catch (IOException ex) {
@@ -204,7 +192,6 @@ public class Import_Export {
 
                 }
                 if(wb != null){
-                    System.out.println("close");
                     try {
                         wb.close();
                     } catch (IOException ex) {
@@ -230,7 +217,6 @@ public class Import_Export {
         try(Scanner scan = new Scanner(f)){
             
             String test = scan.nextLine();
-            
             if(test.split(",").length == 8){
                 if(test.split(",")[0].equals("Account Number") && test.split(",")[1].equals("Post Date") && 
                         test.split(",")[2].equals("Check") && test.split(",")[3].equals("Description") && 
@@ -244,45 +230,49 @@ public class Import_Export {
                             
                             if(!test.contains(", ")){
                                 String test2[] = test.split(",");
-                                if(!test2[3].equals("")){
-                                    if(!test2[3].equals("")){
-
-                                        Bills bill = new Bills();
-
-                                        if(test2[0].split("/")[0].length() > 1){
-
-                                            if(test2[0].split("/")[1].length() > 1){
-                                                bill.setDate(test2[0]);
-                                            }
-                                            else{
-                                                test2[0] = test2[0].split("/")[0] + "/0" + test2[0].split("/")[1] + "/" + test2[0].split("/")[2];
-                                                bill.setDate(test2[0]);
-                                            }
-                                        }
-                                        else{
-                                            test2[0] = "0" + test2[0];
-                                            if(test2[0].split("/")[1].length() > 1){
-                                                bill.setDate(test2[0]);
-                                            }
-                                            else{
-                                                test2[0] = test2[0].split("/")[0] + "/0" + test2[0].split("/")[1] + "/" + test2[0].split("/")[2];
-                                                bill.setDate(test2[0]);
-                                            }
-                                        }
-                                        
-                                        bill.setDescription(test2[2]);
-                                        bill.setExpense(Double.parseDouble(test2[3]));
-                                        bill.setUser_id(1);
-                                        bills.add(bill);
-
-                                    }
-                                }
+                                //if(oldBills.size() != bills.size() || oldBills.size() > 0) {
+                                	System.out.println("Working on getting new Bills...");
+	                                if(!test2[3].equals("")){
+	                                    if(!test2[3].equals("")){
+	
+	                                        Bills bill = new Bills();
+	
+	                                        if(test2[0].split("/")[0].length() > 1){
+	
+	                                            if(test2[0].split("/")[1].length() > 1){
+	                                                bill.setDate(test2[0]);
+	                                            }
+	                                            else{
+	                                                test2[0] = test2[0].split("/")[0] + "/0" + test2[0].split("/")[1] + "/" + test2[0].split("/")[2];
+	                                                bill.setDate(test2[0]);
+	                                            }
+	                                        }
+	                                        else{
+	                                            test2[0] = "0" + test2[0];
+	                                            if(test2[0].split("/")[1].length() > 1){
+	                                                bill.setDate(test2[0]);
+	                                            }
+	                                            else{
+	                                                test2[0] = test2[0].split("/")[0] + "/0" + test2[0].split("/")[1] + "/" + test2[0].split("/")[2];
+	                                                bill.setDate(test2[0]);
+	                                            }
+	                                        }
+	                                        
+	                                        bill.setDescription(test2[2]);
+	                                        bill.setExpense(Double.parseDouble(test2[3]));
+	                                        bills.add(bill);
+	                                        
+	                                    }
+	                                }
+                                //}
                                 else{
-                                    
-                                    Income newIncome = new Income();
-                                    
-                                    if(test2[0].split("/")[0].length() > 1){
-
+                                	
+                                	//if(oldIncome.size() != income.size()) {
+	                                    System.out.println("Possible new Income...");
+	                                    Income newIncome = new Income();
+	                                    
+	                                    if(test2[0].split("/")[0].length() > 1){
+	
                                             if(test2[0].split("/")[1].length() > 1){
                                                 newIncome.setDate(test2[0]);
                                             }
@@ -301,44 +291,48 @@ public class Import_Export {
                                                 newIncome.setDate(test2[0]);
                                             }
                                         }
-                                        
+	                                        
                                         newIncome.setDescription(test2[2]);
                                         newIncome.setIncome(Double.parseDouble(test2[4]));
-                                        newIncome.setUser_id(1);
                                         income.add(newIncome);
+                                	//}
                                     
                                 }
                             }
                             else{
-                                Income newIncome = new Income();
-                                String test2[] = test.split(",");
+                            	
+                            	//if(oldIncome.size() != income.size()) {
+                            	
+	                                Income newIncome = new Income();
+	                                String test2[] = test.split(",");
+	                                
+	                                if(test2[0].split("/")[0].length() > 1){
+	                                    
+	                                    if(test2[0].split("/")[1].length() > 1){
+	                                        newIncome.setDate(test2[0]);
+	                                    }
+	                                    else{
+	                                        test2[0] = test2[0].split("/")[0] + "/0" + test2[0].split("/")[1] + "/" + test2[0].split("/")[2];
+	                                        newIncome.setDate(test2[0]);
+	                                    }
+	                                    
+	                                }
+	                                else{
+	                                    test2[0] = "0" + test2[0];
+	                                    if(test2[0].split("/")[1].length() > 1){
+	                                        newIncome.setDate(test2[0]);
+	                                    }
+	                                    else{
+	                                        test2[0] = test2[0].split("/")[0] + "/0" + test2[0].split("/")[1] + "/" + test2[0].split("/")[2];
+	                                        newIncome.setDate(test2[0]);
+	                                    }
+	                                }
+	                                
+	                                newIncome.setDescription(test2[2].replace("\"", "") + "," + test2[3].replace("\"", ""));
+	                                newIncome.setIncome(Double.parseDouble(test2[5]));
+	                                income.add(newIncome);
                                 
-                                if(test2[0].split("/")[0].length() > 1){
-                                    
-                                    if(test2[0].split("/")[1].length() > 1){
-                                        newIncome.setDate(test2[0]);
-                                    }
-                                    else{
-                                        test2[0] = test2[0].split("/")[0] + "/0" + test2[0].split("/")[1] + "/" + test2[0].split("/")[2];
-                                        newIncome.setDate(test2[0]);
-                                    }
-                                    
-                                }
-                                else{
-                                    test2[0] = "0" + test2[0];
-                                    if(test2[0].split("/")[1].length() > 1){
-                                        newIncome.setDate(test2[0]);
-                                    }
-                                    else{
-                                        test2[0] = test2[0].split("/")[0] + "/0" + test2[0].split("/")[1] + "/" + test2[0].split("/")[2];
-                                        newIncome.setDate(test2[0]);
-                                    }
-                                }
-                                
-                                newIncome.setDescription(test2[2].replace("\"", "") + "," + test2[3].replace("\"", ""));
-                                newIncome.setIncome(Double.parseDouble(test2[5]));
-                                newIncome.setUser_id(1);
-                                income.add(newIncome);
+                            	//}
                                 
                             }
                             
@@ -361,7 +355,7 @@ public class Import_Export {
         bills = updateImportedBillInfo(oldBills);
         updateImportedBills();
         
-        //income = updateImportedIncomeInfo(oldIncome);
+        income = updateImportedIncomeInfo(oldIncome);
         
     }
     
@@ -415,13 +409,16 @@ public class Import_Export {
 
             }
         
+            UpdateExcel ue = new UpdateExcel();
+            ue.update(bills, income);
+            
+        }
+        else {
+        	System.out.println("The sizes are the same!");
         }
         
         System.out.println("");
         System.out.println("");
-        
-        UpdateExcel ue = new UpdateExcel();
-        ue.update(bills, income);
         
         System.out.println("Bills added");
         
@@ -430,23 +427,27 @@ public class Import_Export {
     
     private ArrayList<Income> updateImportedIncomeInfo(ArrayList<Income> oldIncome) throws SQLException{
         
-        income.remove(income.size() - 1);
+        //income.remove(income.size() - 1);
         
+        System.out.println("Start of income import...");
         if(income.size() != oldIncome.size()){
         
             ArrayList<Integer> ids = new ArrayList<>();
 
             int id = 1;
-
+            
+            System.out.println("Setting income ids...");
             for(int i = income.size() - 1; i >= 0; i--){
                 income.get(i).setId(id);
                 id++;
             }
-
+            
+            System.out.println("Adding ids from oldIncome ids...");
             for(int i = 0; i < oldIncome.size(); i++){
                 ids.add(oldIncome.get(i).getId());
             }
-            System.out.println("Test");
+            
+            System.out.println("Removing old income");
             for(int i = 0; i < income.size(); i++){
                 for(int j = 0; j < ids.size(); j++){
                     if(income.get(i).getId() == ids.get(j)){
@@ -455,8 +456,8 @@ public class Import_Export {
                     }
                 }
             }
-            System.out.println("Test 2");
-
+            
+            System.out.println("Setting income category...");
             for(int i = 0; i < oldIncome.size(); i++){
                 for(int j = 0; j < income.size(); j++){
 
@@ -477,7 +478,7 @@ public class Import_Export {
             for(int i = 0; i < income.size(); i++){
 
                 if(income.get(i).getCategory().equals("")){
-                    income.get(i).setCategory("No Category found");
+                    income.get(i).setCategory("No Category Found");
                 }
 
             }
@@ -492,6 +493,7 @@ public class Import_Export {
         }
         
         return income;
+        
     }
     
     private void updateImportedBills(){
@@ -525,18 +527,23 @@ public class Import_Export {
             wb.close();
             input.close();
             
-        }catch(IOException io){
-            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
         }
         
+        System.out.println("Import bills");
         for(int i = 0; i < importBillUpdates.size(); i++){
             
             for(int j = 0; j < bills.size(); j++){
                 
-                if(bills.get(j).getCategory().equals("No Category Found")){
+                if(bills.get(j).getCategory().equals("No Category Found") || bills.get(j).getCategory().equals("")){
                     
                     if(bills.get(j).getDescription().contains(importBillUpdates.get(i).split("someDelimeter")[1])){
+                    	System.out.println("Test of import bill update...");
                         bills.get(j).setCategory(importBillUpdates.get(i).split("someDelimeter")[0]);
+                    }
+                    else {
+                    	bills.get(j).setCategory("No Category Found");
                     }
                     
                 }

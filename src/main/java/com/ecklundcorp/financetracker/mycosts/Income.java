@@ -14,14 +14,12 @@ public class Income {
     private String date, category, description;
     private double income;
     private int id;
-    private int user_id;
     
     public Income(){
         date = category = "";
         description = " ";
         income = 0.00;
         id = 1;
-        user_id = 1;
     }
 
     public int getId() {
@@ -62,14 +60,6 @@ public class Income {
 
     public void setIncome(double income) {
         this.income = income;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
     
 }

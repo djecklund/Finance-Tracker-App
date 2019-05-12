@@ -1720,23 +1720,15 @@ public class MyCosts extends javax.swing.JFrame {
             Import_Export ie = new Import_Export();
             try {
                 ie.importFile(jfc.getSelectedFile().getPath(), bills, income, importIssuesTable);
-                newBills = ie.getBills();
-                newIncome = ie.getIncome();
+                bills = ie.getBills();
+                income = ie.getIncome();
             } catch (IOException ex) {
                 Logger.getLogger(MyCosts.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
                 Logger.getLogger(MyCosts.class.getName()).log(Level.SEVERE, null, ex);
             }
-            //System.out.println(jfc.getSelectedFile().getPath());
+            
             importFileLBL.setText("File: " + jfc.getSelectedFile().getName());
-        }
-        
-        for(int i = newBills.size() - 1; i >= 0; i--){
-            bills.add(newBills.get(i));
-        }
-        
-        for(int i = newIncome.size() - 1; i >= 0; i--){
-            income.add(newIncome.get(i));
         }
         
         UpdateExcel updater = new UpdateExcel();

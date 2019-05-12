@@ -58,7 +58,6 @@ public class UpdateExcel {
                 expenseCell.setCellType(CellType.NUMERIC);
                 expenseCell.setCellValue(bills.get(i).getExpense());
                 descriptionCell.setCellValue(bills.get(i).getDescription());
-                userIdCell.setCellValue(bills.get(i).getUser_id());
                 
             }
             
@@ -73,7 +72,6 @@ public class UpdateExcel {
                 XSSFCell categoryCell = row.createCell(2);
                 XSSFCell incomeCell = row.createCell(3);
                 XSSFCell descriptionCell = row.createCell(4);
-                XSSFCell userIdCell = row.createCell(5);
                         
                 // Place the data in each cell of each row
                 idCell.setCellValue(income.get(i).getId());
@@ -84,7 +82,6 @@ public class UpdateExcel {
                 incomeCell.setCellType(CellType.NUMERIC);
                 incomeCell.setCellValue(income.get(i).getIncome());
                 descriptionCell.setCellValue(income.get(i).getDescription());
-                userIdCell.setCellValue(income.get(i).getUser_id());
                 
             }
             
@@ -98,14 +95,12 @@ public class UpdateExcel {
             XSSFCell billCategoryHeaderCell = billHeaders.createCell(2);
             XSSFCell billExpenseHeaderCell = billHeaders.createCell(3);
             XSSFCell billDescriptionHeaderCell = billHeaders.createCell(4);
-            XSSFCell billUserIdCell = billHeaders.createCell(5);
             
             XSSFCell incomeIdHeaderCell = incomeHeaders.createCell(0);
             XSSFCell incomeDateHeaderCell = incomeHeaders.createCell(1);
             XSSFCell incomeCategoryHeaderCell = incomeHeaders.createCell(2);
             XSSFCell incomeHeaderCell = incomeHeaders.createCell(3);
             XSSFCell incomeDescriptionHeaderCell = incomeHeaders.createCell(4);
-            XSSFCell incomeUserIdCell = incomeHeaders.createCell(5);
             
             // Populate the cells of the header row
             billIdHeaderCell.setCellValue("ID");
@@ -113,14 +108,12 @@ public class UpdateExcel {
             billCategoryHeaderCell.setCellValue("Expense Category");
             billExpenseHeaderCell.setCellValue("Expense");
             billDescriptionHeaderCell.setCellValue("Expense Description");
-            billUserIdCell.setCellValue("User ID");
             
             incomeIdHeaderCell.setCellValue("ID");
             incomeDateHeaderCell.setCellValue("Date");
             incomeCategoryHeaderCell.setCellValue("Income Category");
             incomeHeaderCell.setCellValue("Income");
             incomeDescriptionHeaderCell.setCellValue("Income Description");
-            incomeUserIdCell.setCellValue("User ID");
             
             FileOutputStream resultsOutputFile = new FileOutputStream(pathway);
 
@@ -130,14 +123,12 @@ public class UpdateExcel {
             billSheet.autoSizeColumn(2);
             billSheet.autoSizeColumn(3);
             billSheet.autoSizeColumn(4);
-            billSheet.autoSizeColumn(5);
             
             incomeSheet.autoSizeColumn(0);
             incomeSheet.autoSizeColumn(1);
             incomeSheet.autoSizeColumn(2);
             incomeSheet.autoSizeColumn(3);
             incomeSheet.autoSizeColumn(4);
-            incomeSheet.autoSizeColumn(5);
             
             //write this workbook to an OutputStream
             wb.write(resultsOutputFile);

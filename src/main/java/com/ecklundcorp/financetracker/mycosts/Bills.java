@@ -14,14 +14,12 @@ public class Bills {
     private String date, category, description;
     private double expense;
     private int id;
-    private int user_id;
     
     public Bills(){
         date = category = "";
         description = " ";
         expense = 0.00;
         id = 1;
-        user_id = 1;
     }
 
     public int getId() {
@@ -62,14 +60,6 @@ public class Bills {
 
     public void setExpense(double expense) {
         this.expense = expense;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
     
 }
